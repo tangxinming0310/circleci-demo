@@ -7,5 +7,28 @@ jobs:
       only:
         - master
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "f3:6f:71:64:fc:f4:6f:e8:4b:d9:63:37:70:5d:b8:9f"
       - checkout
-      - run: echo "A first hello"
+      - restore_cache:
+          key:
+            - dependencies_bridge
+      - run:
+          name: Install
+          command: yarn Install
+      - save_cache:
+          paths:
+            - node_modules
+            key: dependencies_bridge
+      - run:
+          name: Build
+          command: yarn build
+      - run:
+          name: Prepare shell commands
+          # shell chmod +x 赋予执行权限
+          # 执行shell脚本
+          command: chmod +x scripts/deploy.sh
+      - run:
+          name: Run Deploy to Github pages
+          command: ./scripts/deploy.sh
