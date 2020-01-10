@@ -12,15 +12,15 @@ jobs:
             - "f3:6f:71:64:fc:f4:6f:e8:4b:d9:63:37:70:5d:b8:9f"
       - checkout
       - restore_cache:
-          key:
+          keys:
             - dependencies_bridge
       - run:
           name: Install
-          command: yarn Install
+          command: yarn install
       - save_cache:
           paths:
             - node_modules
-            key: dependencies_bridge
+          key: dependencies_bridge
       - run:
           name: Build
           command: yarn build
