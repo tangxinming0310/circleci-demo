@@ -88,7 +88,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "HelloWorld Bridge",
   props: {
     msg: String
   }
